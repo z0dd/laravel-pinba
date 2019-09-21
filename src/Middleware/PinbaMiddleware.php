@@ -3,7 +3,15 @@
  * Created by PhpStorm.
  * User: z0dd
  */
+namespace z0dd\Pinba\Middleware;
 
+use z0dd\Pinba\Pinba;
+
+/**
+ * Class PinbaMiddleware
+ *
+ * @package z0dd\Pinba\Middleware
+ */
 class PinbaMiddleware
 {
     /**
@@ -18,19 +26,18 @@ class PinbaMiddleware
         /**
          * Pinba extesion integration
          */
-        if (\z0dd\Pinba\Pinba::checkPinbaEnable()) {
-            $unknown = config('pinba.unknown');
+        if (Pinba::checkPinbaEnable()) {
 
             $path = $request->getPathInfo();
             if (empty($path)) {
-                $path = $unknown;
+                $path = Pinba::getUnknown();
             }
 
             pinba_script_name_set($path);
 
             $middleware = implode('.',$request->route()->middleware());
             if (empty($middleware)) {
-                $middleware = $unknown;
+                $middleware = Pinba::getUnknown();
             }
 
             pinba_tag_set('middleware',$middleware);

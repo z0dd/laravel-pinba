@@ -6,7 +6,7 @@
 
 return [
     /**
-     * Enable pinba extension.
+     * Enable/Disable pinba extension.
      */
 	'enable' => true,
 
@@ -14,6 +14,7 @@ return [
      * Set this variable to pinba server name
      */
 	'host_name' => env('APP_NAME', 'My_App'),
+
     /**
      * Name of unknow paths or middlewares
      */
